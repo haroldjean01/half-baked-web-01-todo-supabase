@@ -20,11 +20,11 @@ todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // create variable for todo form
-    const formdata = new FormData(todoForm);
-    const todo = FormData.get('todo');
+    const formData = new FormData(todoForm);
+    const todo = formData.get('todo');
 
     // get what the user types in
-    await createTodo();
+    await createTodo(todo);
 
     todoForm.reset();
     displayTodos();
@@ -39,8 +39,20 @@ todoForm.addEventListener('submit', async (e) => {
 
 async function displayTodos() {
     // clear the container (.innerHTML = '')
+    const todos = await getTodos();
+    todosEl.textContent = '';
     // display the list of todos,
+    for (let todo of todos) {
+        const todoEl = renderTodo(todo);
+        // allows user to click displayed todo
+        todoEl.addEventListener('click', async () => {
+            await completeTodo(todo.id);
+            displayTodos();
+        });
+        todosEl.append(todoEl);
+    }
     // call render function, pass in state and complete handler function!
+
     // append to .todos
 }
 
