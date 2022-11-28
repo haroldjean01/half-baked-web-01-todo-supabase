@@ -57,7 +57,7 @@ async function displayTodos() {
 }
 
 // add page load function
-// fetch the todos and store in state
+// fetch the todos and store in stat
 // call displayTodos
 
 logoutButton.addEventListener('click', () => {
@@ -65,6 +65,8 @@ logoutButton.addEventListener('click', () => {
 });
 
 deleteButton.addEventListener('click', async () => {
+    deleteAllTodos();
+    displayTodos();
     // delete all todos
     // modify state to match
     // re displayTodos
